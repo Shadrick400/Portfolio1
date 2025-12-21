@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories | SparkPic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { primary: '#6366f1' },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#0f172a] text-slate-100 min-h-screen">
+    <!-- Navigation -->
+    <nav class="glass-nav px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/20">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                </div>
+                <a href="index.html" class="text-2xl font-bold font-display tracking-tight text-white">SparkPic</a>
+            </div>
+
+            <div class="hidden lg:flex items-center gap-8 text-sm font-medium">
+                <a href="index.html" class="hover:text-indigo-400 transition-colors">Home</a>
+                <div class="relative group">
+                    <button class="flex items-center gap-1 text-indigo-400">
+                        Categories
+                        <svg class="w-4 h-4 group-hover:rotate-180 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div id="categories-dropdown" class="absolute top-full left-0 mt-4 w-56 glass rounded-2xl p-2 hidden group-hover:block animate-in">
+                        <a href="categories.html?cat=nature" class="flex items-center gap-3 px-4 py-3 hover:bg-white/5 rounded-xl transition-colors"><span>🌳</span> Nature</a>
+                        <a href="categories.html?cat=animals" class="flex items-center gap-3 px-4 py-3 hover:bg-white/5 rounded-xl transition-colors"><span>🐶</span> Animals</a>
+                        <a href="categories.html?cat=cities" class="flex items-center gap-3 px-4 py-3 hover:bg-white/5 rounded-xl transition-colors"><span>🏙️</span> Architecture</a>
+                        <a href="categories.html?cat=technology" class="flex items-center gap-3 px-4 py-3 hover:bg-white/5 rounded-xl transition-colors"><span>💻</span> Technology</a>
+                        <a href="categories.html?cat=abstract" class="flex items-center gap-3 px-4 py-3 hover:bg-white/5 rounded-xl transition-colors"><span>🎨</span> Abstract</a>
+                    </div>
+                </div>
+                <a href="latest.html" class="hover:text-indigo-400 transition-colors">Latest</a>
+                <a href="about.html" class="hover:text-indigo-400 transition-colors">About</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <button id="favorites-link" class="p-2 hover:bg-white/5 rounded-full transition-colors relative group">
+                    <svg class="w-6 h-6 text-slate-400 group-hover:text-rose-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                    <span id="fav-count" class="absolute -top-1 -right-1 w-5 h-5 bg-indigo-600 text-[10px] flex items-center justify-center rounded-full hidden border-2 border-[#0f172a]">0</span>
+                </button>
+                <div class="lg:hidden">
+                    <button id="mobile-menu-toggle" class="p-2 hover:bg-white/5 rounded-full">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 z-[500] hidden bg-[#0f172a]/95 backdrop-blur-xl animate-in">
+        <div class="flex flex-col items-center justify-center h-full gap-8 text-2xl font-display font-bold">
+            <a href="index.html" class="hover:text-indigo-400">Home</a>
+            <div class="flex flex-col items-center gap-4 text-indigo-400">
+                <span class="text-slate-500 text-sm uppercase tracking-widest font-medium">Categories</span>
+                <a href="categories.html?cat=nature" class="hover:text-white">Nature</a>
+                <a href="categories.html?cat=animals" class="hover:text-white">Animals</a>
+                <a href="categories.html?cat=cities" class="hover:text-white">Architecture</a>
+                <a href="categories.html?cat=technology" class="hover:text-white">Technology</a>
+            </div>
+            <a href="latest.html" class="hover:text-indigo-400">Latest</a>
+            <a href="about.html" class="hover:text-indigo-400">About</a>
+        </div>
+    </div>
+
+    <!-- Category Header -->
+    <header class="py-20 px-6 bg-gradient-to-b from-indigo-500/5 to-transparent">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+                <div>
+                    <nav class="flex items-center gap-2 text-sm text-slate-500 mb-4 animate-in">
+                        <a href="index.html" class="hover:text-indigo-400">Home</a>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        <span class="text-slate-300">Categories</span>
+                    </nav>
+                    <h1 id="category-title" class="text-5xl md:text-7xl font-display font-black animate-in" style="animation-delay: 0.1s">Exploring</h1>
+                    <p id="category-description" class="text-xl text-slate-400 mt-6 max-w-2xl animate-in" style="animation-delay: 0.2s"></p>
+                </div>
+                <div class="flex gap-4 animate-in" style="animation-delay: 0.3s">
+                    <div class="relative">
+                        <input type="text" id="cat-search" placeholder="Search in this category..." class="px-6 py-3 glass rounded-xl w-64 focus:outline-none focus:border-indigo-500 border border-transparent transition-all">
+                        <svg class="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Grid -->
+    <main class="max-w-7xl mx-auto px-6 pb-24">
+        <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+            <!-- Items injected by JS -->
+        </div>
+        <div id="loader" class="mt-20 text-center hidden">
+            <div class="inline-block w-8 h-8 border-4 border-indigo-500/30 border-t-indigo-500 rounded-full animate-spin"></div>
+        </div>
+    </main>
+
+    <!-- Footer copied from index -->
+    <footer class="border-t border-white/5 py-12 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <p class="text-xl font-display font-bold">SparkPic</p>
+                <p class="text-slate-500 text-sm mt-1">© 2026 Premium Visual Discovery Engine.</p>
+            </div>
+            <div class="flex gap-8 text-sm text-slate-400">
+                <a href="#" class="hover:text-white transition-colors">Privacy</a>
+                <a href="#" class="hover:text-white transition-colors">Terms</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals copied from index -->
+    <div id="image-modal" class="fixed inset-0 z-[1000] hidden flex items-center justify-center p-6">
+        <div class="absolute inset-0 bg-black/95 backdrop-blur-xl modal-overlay"></div>
+        <div class="modal-content relative animate-in w-full max-w-6xl flex flex-col">
+            <button id="close-modal" class="absolute top-4 right-4 md:top-6 md:right-6 z-10 p-2 glass rounded-full hover:bg-white/10 transition-colors">
+                <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <div id="modal-image-container" class="flex-1 overflow-hidden bg-black/50 flex items-center justify-center min-h-0">
+                <img id="modal-img" src="" alt="" class="max-w-full max-h-full object-contain cursor-pointer" title="Click to view full original">
+            </div>
+            <div class="p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 border-t border-white/5 bg-[#1e293b]">
+                <div>
+                    <h3 id="modal-title" class="text-2xl font-display font-bold mb-1">Image Title</h3>
+                    <p id="modal-author" class="text-slate-400 text-sm">Photography by Photographer Name</p>
+                </div>
+                <div class="flex flex-wrap md:flex-nowrap gap-3 md:gap-4">
+                    <button id="modal-fav-btn" class="flex-1 md:flex-none px-4 md:px-6 py-2.5 md:py-3 glass rounded-xl font-semibold flex items-center justify-center gap-2 hover:bg-white/10 transition-colors text-sm md:text-base">
+                        <svg class="w-4 h-4 md:w-5 md:h-5 heart-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                        Favorite
+                    </button>
+                    <a id="download-link" href="#" target="_blank" download class="btn-primary flex-1 md:flex-none justify-center">
+                        <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Download HD
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Favorites Modal -->
+    <div id="favorites-modal" class="fixed inset-0 z-[1000] hidden flex items-center justify-center p-6">
+        <div class="absolute inset-0 bg-black/95 backdrop-blur-lg"></div>
+        <div class="relative w-full max-w-7xl max-h-[90vh] overflow-hidden flex flex-col animate-in">
+            <div class="flex items-center justify-between mb-8">
+                <h2 class="text-4xl font-display font-black">Your Collection</h2>
+                <button id="close-favorites" class="p-3 glass rounded-full hover:bg-white/10">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <div id="favorites-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 overflow-y-auto pb-12 pr-4">
+                <!-- Favorites injected here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_KEY = 'bIfexNB59CfNMD23pL28DcQUUb3gZWvtD12HBWCFRWSEcwkOnZnckm2w';
+        const BASE_URL = 'https://api.pexels.com/v1';
+
+        const categoryNames = {
+            nature: 'Nature Wonders',
+            animals: 'Wild Species',
+            cities: 'Urban Spirits',
+            technology: 'Digital Future',
+            abstract: 'Abstract Flows',
+            cars: 'Speed & Design',
+            gaming: 'Game Worlds'
+        };
+
+        const categoryDescriptions = {
+            nature: 'Dive into the breathtaking beauty of our planet. From misty mountains to crystalline shores.',
+            animals: 'Capturing the raw emotion and Majestic presence of the animal kingdom.',
+            cities: 'The vibrant pulse of modern civilization, architecture, and street life.',
+            technology: 'Innovation visualized. A glimpse into the machinery of tomorrow.',
+            abstract: 'Where reality meets imagination. Exploring colors, shapes, and feelings.',
+            cars: 'The art of engineering. Sleek lines and powerful aesthetics.',
+            gaming: 'Immersion redefined. The digital landscapes we explore.'
+        };
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const category = urlParams.get('cat') || 'nature';
+
+        document.getElementById('category-title').textContent = categoryNames[category] || 'Collection';
+        document.getElementById('category-description').textContent = categoryDescriptions[category] || 'A curated selection of high-resolution imagery.';
+
+        let state = {
+            images: [],
+            favorites: JSON.parse(localStorage.getItem('sparkpic_favs')) || [],
+            page: 1,
+            isLoading: false,
+            hasMore: true
+        };
+
+        const elements = {
+            grid: document.getElementById('gallery-grid'),
+            loader: document.getElementById('loader'),
+            modal: document.getElementById('image-modal'),
+            modalImg: document.getElementById('modal-img'),
+            modalTitle: document.getElementById('modal-title'),
+            modalAuthor: document.getElementById('modal-author'),
+            closeModal: document.getElementById('close-modal'),
+            downloadLink: document.getElementById('download-link'),
+            favLink: document.getElementById('favorites-link'),
+            favCount: document.getElementById('fav-count'),
+            favModal: document.getElementById('favorites-modal'),
+            closeFavs: document.getElementById('close-favorites'),
+            favGrid: document.getElementById('favorites-grid'),
+            modalFavBtn: document.getElementById('modal-fav-btn'),
+            catSearch: document.getElementById('cat-search')
+        };
+
+        async function fetchCategoryImages(page = 1) {
+            if (state.isLoading) return;
+            state.isLoading = true;
+            elements.loader.classList.remove('hidden');
+
+            try {
+                const response = await fetch(`${BASE_URL}/search?query=${category}&per_page=20&page=${page}`, {
+                    headers: { Authorization: API_KEY }
+                });
+                const data = await response.json();
+                
+                if (page === 1) state.images = [];
+                state.images = [...state.images, ...data.photos];
+                renderImages(data.photos, page === 1);
+                
+                state.page = page;
+                state.hasMore = data.photos.length > 0;
+            } catch (err) {
+                console.error(err);
+            } finally {
+                state.isLoading = false;
+                elements.loader.classList.add('hidden');
+            }
+        }
+
+        function renderImages(photos, clear = false) {
+            if (clear) elements.grid.innerHTML = '';
+            
+            photos.forEach((photo, idx) => {
+                const isFav = state.favorites.some(f => f.id === photo.id);
+                const card = document.createElement('div');
+                card.className = 'image-card h-80 stagger-item';
+                card.innerHTML = `
+                    <img src="${photo.src.large}" alt="${photo.alt}" loading="lazy" class="w-full h-full object-cover">
+                    <div class="image-overlay">
+                        <div class="flex justify-between items-start mb-auto">
+                            <span class="px-2 py-1 bg-white/10 backdrop-blur-md rounded-md text-[10px] uppercase tracking-widest font-bold">Category HD</span>
+                            <button class="fav-btn p-2 rounded-full glass ${isFav ? 'text-rose-500 fill-rose-500' : 'text-white'}" data-id="${photo.id}">
+                                <svg class="w-5 h-5" fill="${isFav ? 'currentColor' : 'none'}" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <h3 class="font-display font-bold text-lg leading-tight mb-1 truncate">${photo.alt || 'Untitled Masterpiece'}</h3>
+                        <div class="flex items-center gap-2 text-slate-300 text-xs text-left">
+                            <div class="w-5 h-5 rounded-full bg-indigo-500/50 flex items-center justify-center font-bold text-[8px] uppercase">${photo.photographer.charAt(0)}</div>
+                            <span>${photo.photographer}</span>
+                        </div>
+                    </div>
+                `;
+                
+                card.onclick = (e) => { if (!e.target.closest('.fav-btn')) openModal(photo); };
+                card.querySelector('.fav-btn').onclick = (e) => {
+                    e.stopPropagation();
+                    toggleFavorite(photo);
+                };
+                
+                elements.grid.appendChild(card);
+                setTimeout(() => card.classList.add('animate-in'), idx * 50);
+            });
+        }
+
+        // Shared Logic (Modal/Favs) - Same as index.html
+        function openModal(photo) {
+            elements.modalImg.src = photo.src.original;
+            elements.modalTitle.textContent = photo.alt || 'Untitled Masterpiece';
+            elements.modalAuthor.textContent = `Captured by ${photo.photographer}`;
+            elements.downloadLink.href = photo.src.original;
+            elements.modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            const isFav = state.favorites.some(f => f.id === photo.id);
+            updateModalFavBtn(isFav);
+            elements.modalFavBtn.onclick = () => toggleFavorite(photo);
+            elements.modalImg.onclick = () => window.open(photo.src.original, '_blank');
+        }
+
+        function closeModal() { elements.modal.classList.add('hidden'); document.body.style.overflow = ''; }
+        elements.closeModal.onclick = closeModal;
+        elements.modal.onclick = (e) => { if (e.target.classList.contains('modal-overlay')) closeModal(); };
+
+        function toggleFavorite(photo) {
+            const idx = state.favorites.findIndex(f => f.id === photo.id);
+            if (idx > -1) state.favorites.splice(idx, 1);
+            else state.favorites.push(photo);
+            localStorage.setItem('sparkpic_favs', JSON.stringify(state.favorites));
+            updateFavUI();
+            const isFavNow = state.favorites.some(f => f.id === photo.id);
+            updateModalFavBtn(isFavNow);
+            document.querySelectorAll(`.fav-btn[data-id="${photo.id}"]`).forEach(btn => {
+                if (isFavNow) { btn.classList.add('text-rose-500', 'fill-rose-500'); btn.querySelector('svg').setAttribute('fill', 'currentColor'); }
+                else { btn.classList.remove('text-rose-500', 'fill-rose-500'); btn.querySelector('svg').setAttribute('fill', 'none'); }
+            });
+        }
+
+        function updateModalFavBtn(isFav) {
+            const svg = elements.modalFavBtn.querySelector('svg');
+            if (isFav) { elements.modalFavBtn.classList.add('text-rose-500'); svg.setAttribute('fill', 'currentColor'); }
+            else { elements.modalFavBtn.classList.remove('text-rose-500'); svg.setAttribute('fill', 'none'); }
+        }
+
+        function updateFavUI() {
+            const count = state.favorites.length;
+            elements.favCount.textContent = count;
+            elements.favCount.classList.toggle('hidden', count === 0);
+        }
+
+        function renderFavorites() {
+            elements.favGrid.innerHTML = '';
+            if (!state.favorites.length) {
+                elements.favGrid.innerHTML = `<div class="col-span-full py-20 text-center text-slate-500">Your collection is empty</div>`;
+                return;
+            }
+            state.favorites.forEach(photo => {
+                const card = document.createElement('div');
+                card.className = 'image-card h-64 animate-in';
+                card.innerHTML = `
+                    <img src="${photo.src.medium}" alt="${photo.alt}" class="w-full h-full object-cover">
+                    <div class="image-overlay">
+                        <button class="remove-fav absolute top-4 right-4 p-2 glass rounded-full text-rose-500"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
+                        <h3 class="font-display font-bold text-sm truncate text-left">${photo.alt || 'Untitled'}</h3>
+                    </div>
+                `;
+                card.onclick = (e) => { if (!e.target.closest('.remove-fav')) openModal(photo); };
+                card.querySelector('.remove-fav').onclick = (e) => { e.stopPropagation(); toggleFavorite(photo); renderFavorites(); };
+                elements.favGrid.appendChild(card);
+            });
+        }
+
+        elements.favLink.onclick = () => { renderFavorites(); elements.favModal.classList.remove('hidden'); document.body.style.overflow = 'hidden'; };
+        elements.closeFavs.onclick = () => { elements.favModal.classList.add('hidden'); document.body.style.overflow = ''; };
+
+        window.onscroll = () => {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 1000) {
+                if (!state.isLoading && state.hasMore) fetchCategoryImages(state.page + 1);
+            }
+        };
+
+        // Local search filter
+        elements.catSearch.oninput = (e) => {
+            const val = e.target.value.toLowerCase();
+            const filtered = state.images.filter(img => img.alt.toLowerCase().includes(val));
+            renderImages(filtered, true);
+        };
+
+        fetchCategoryImages();
+        updateFavUI();
+
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuToggle.onclick = () => {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            mobileMenu.classList.toggle('hidden');
+            document.body.style.overflow = isHidden ? 'hidden' : '';
+            
+            mobileMenuToggle.innerHTML = isHidden 
+                ? '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>'
+                : '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>';
+        };
+
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.onclick = () => {
+                mobileMenu.classList.add('hidden');
+                document.body.style.overflow = '';
+                mobileMenuToggle.innerHTML = '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>';
+            };
+        });
+    </script>
+</body>
+</html>
